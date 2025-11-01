@@ -11,9 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: YAML Lint
-        uses: ibiqlik/action-yamllint@v3
+      - name: Install Pip requirements
+        run: pip install -r requirements.txt
 
+      - name: Run YAMLLint
+        run: yamllint .
 
   python-ruff:
     runs-on: ubuntu-latest
