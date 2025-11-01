@@ -65,6 +65,10 @@ def main():
         sys.exit(1)
     logging.info("Dependencies are installed!")
 
+    if discord_is_running():
+        logging.info("Discord is running! Updates will not be performed.")
+        sys.exit(1)
+
     logging.info("Beginning installation process...")
 
     f_path = f"/tmp/discord-{uuid1()}"
@@ -201,6 +205,12 @@ def are_dependencies_installed(packages: List[str], log_level: int):
             get_installed_version_num(package, log_level) for package in packages
         ]
     )
+
+
+def discord_is_running() -> bool:
+    # TODO: implement this function using `ps aux` and then looking for '/usr/share/discord/Discord'
+    #
+    return False
 
 
 def download_latest(f_path: str):
