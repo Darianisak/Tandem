@@ -11,6 +11,7 @@ import requests
 
 DISCORD_LINUX_DOWNLOAD = "https://discord.com/api/download?platform=linux"
 DISCORD_PKG_NAME = "discord"
+DISCORD_PS_REGEX = r"\d{4}\s\?\s{8}(?:00\:00\:00)\s(Discord)"
 DISCORD_DEPENDENCIES = [
     "libasound2",
     "libatomic1",
@@ -64,6 +65,10 @@ def main():
         )
         sys.exit(1)
     logging.info("Dependencies are installed!")
+
+    logging.info("Checking if %s is running...", DISCORD_PKG_NAME)
+    if discord_is_running(pkg_name=DISCORD_PKG_NAME):
+        sys.exit(1)
 
     logging.info("Beginning installation process...")
 
@@ -201,6 +206,18 @@ def are_dependencies_installed(packages: List[str], log_level: int):
             get_installed_version_num(package, log_level) for package in packages
         ]
     )
+
+
+def discord_is_running(pkg_name: str) -> bool:
+    with Popen(["ps", "-e"], stdout=PIPE, stderr=PIPE, encoding="UTF-8") as ps:
+        ps_search = re.search(DISCORD_PS_REGEX, ps.stdout.read())
+
+        if ps_search:
+            logging.info("Please close %s and try again.", pkg_name)
+            return True
+
+        logging.info("%s is not currently running. Continuing...", pkg_name)
+        return False
 
 
 def download_latest(f_path: str):

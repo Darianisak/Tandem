@@ -5,20 +5,18 @@
 
 ## Motivation
 
-*Tandem* was born out a minor annoyance: the Linux Desktop application
-*does not* auto update.
+*Tandem* was born from a minor annoyance: Discord's Linux app *does not*
+auto update.
 
-With *Tandem*, what used to be a multi click process is now a simple command,
-which *can also* be run in the background.
+*Tandem* streamlines the client update process, making a multi-click operation
+achievable with a single command.
 
 ## Using Tandem
 
 If you're *not* planning on poking around with *Tandem's* source code, then
-you can use the pre-built binary executable.
+you can use the pre-built executable, which can be downloaded [here][Releases].
 
-This binary can be downloaded from the project's releases, [here][Releases].
-
-Once you've downloaded the appropriate binary, it can be run like so:
+Once you've downloaded the executable, it can be run:
 
 ``` bash
 cd ~/Downloads
@@ -63,7 +61,7 @@ Once these are installed, you're ready to go!
 
 ### 1: Checking out the project
 
-First, we'll get *Tandem*'s source code onto our machine:
+First, checkout *Tandem*'s source code:
 
 ``` bash
 mkdir /tmp/tandem
@@ -97,20 +95,20 @@ INFO - Installed version is up to date!
 """
 ```
 
-And then we'll check that Discord has been installed with:
+We'll then check that Discord has been installed with:
 
 ``` bash
 apt policy discord
 ```
 
-For further details about *Tandem*, or the options that it can take, check out
+For further details about *Tandem*, or the options that it can take, refer to
 the help dialog:
 
 ``` bash
 python3 update_discord.py --help
 
 """
-usage: tandem [-h] [-v] [--dpkg-verbose] [--dry-run]
+usage: tandem [-h] [-v] [--dpkg-verbose] [--[here][Releases].dry-run]
 
 A Discord upgrade client for Linux.
 
@@ -126,8 +124,7 @@ Authored by <culver.darian@gmail.com>, licensed under GPL v3.
 
 ## Building Tandem
 
-*Tandem* is build using [PyInstaller], which complies the tool into a single
-binary file.
+*Tandem* binaries are built using [PyInstaller] and distributed via GitHub.
 
 *Assuming* you already have the project checked out under `/tmp/tandem`, the
 next step would be to create a virtual environment:
@@ -145,8 +142,8 @@ Then, we'll run the build process:
 pyinstaller update_discord.py --onefile --name tandem
 ```
 
-Alongside a number of build artifacts, this will produce a single executable
-binary file:
+Alongside a number of build artifacts, this will produce a single
+executable file:
 
 ``` bash
 cd dist
@@ -171,16 +168,18 @@ Authored by <culver.darian@gmail.com>, licensed under GPL v3.
 ## FAQ
 ### What distributions has this been tested with?
 
-*Tandem* has been tested with both Ubuntu Noble and Debian Bookwork.
+*Tandem* has been tested with:
+
+* Ubuntu Noble (Ubuntu 24.04 LTS)
+* Debian Bookworm (Debian 12).
 
 ### What if I already have Discord installed?
 
-That's great! *Tandem* will not attempt to do an update *unless* your installed
-version of Discord *is* older than the most recently released version from
-Discord's upgrade channels.
+*Tandem* will not attempt to update Discord *unless* your installed version
+*is* older than the most recent version of Discord.
 
-*If* you have the most recently released version already, *Tandem* will not
-attempt to do anything.
+*If* you have the most recently version already, *Tandem* will not make
+any changes.
 
 <!-- Links -->
 
