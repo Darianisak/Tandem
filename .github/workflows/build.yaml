@@ -1,13 +1,17 @@
 ---
-name: Build Tasks
-on: [push]
+name: Build Tandem
+# yamllint disable-line rule:truthy
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   tandem-binary:
     runs-on: ubuntu-latest
     container: python:3.11-bookworm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install requirements
         run: pip install -r requirements.txt
