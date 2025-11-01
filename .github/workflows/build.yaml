@@ -4,7 +4,7 @@ name: Build Tandem
 on:
   push:
     branches:
-      - main
+      - darian/ci-rewrite
 
 jobs:
   tandem-binary:
@@ -24,3 +24,8 @@ jobs:
         with:
           name: tandem
           path: dist
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/tandem
